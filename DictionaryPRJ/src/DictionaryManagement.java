@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -40,4 +41,128 @@ public class DictionaryManagement {
         }
     }
 
+    public static void dictionaryLookup(Dictionary dictionary) {
+        ArrayList<Word> words = dictionary.getWords();
+        Scanner sc = new Scanner(System.in);
+        while (true) {
+            System.out.print("Search for a word (Enter '0' to exit): ");
+            String line = sc.nextLine().trim();
+
+            if (line.equals("0")) {
+                System.out.println("Exiting...");
+                break;
+            }
+
+            boolean found = false;
+            for (Word word : words) {
+                if (word.getWordTarget().equalsIgnoreCase(line)) {
+                    System.out.println("Word: " + word.getWordTarget());
+                    System.out.println("Explanation: " + word.getWordExplain());
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found) {
+                System.out.println("Word not found!");
+            }
+        }
+    }
+
+    public static void dictionaryAddWord(Dictionary dictionary) {
+        insertFromCommandLine(dictionary);
+    }
+
+    public static void dictionaryModifyWord(Dictionary dictionary) {
+        ArrayList<Word> words = dictionary.getWords();
+        Scanner sc = new Scanner(System.in);
+        while (true) {
+            System.out.print("Modify a word (Enter '0' to exit): ");
+            String line = sc.nextLine().trim();
+
+            if (line.equals("0")) {
+                System.out.println("Exiting...");
+                break;
+            }
+
+            boolean found = false;
+            for (Word word : words) {
+                if (word.getWordTarget().equalsIgnoreCase(line)) {
+                    System.out.println("Old explanation: " + word.getWordExplain());
+                    System.out.print("New explanation: ");
+                    word.setWordExplain(sc.nextLine());
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found) {
+                System.out.println("Word not found!");
+            }
+        }
+        dictionary.setWords(words);
+    }
+
+    public static void dictionaryDeleteWord(Dictionary dictionary) {
+        ArrayList<Word> words = dictionary.getWords();
+        Scanner sc = new Scanner(System.in);
+        while (true) {
+            System.out.print("Delete a word (Enter '0' to exit): ");
+            String line = sc.nextLine().trim();
+
+            if (line.equals("0")) {
+                System.out.println("Exiting...");
+                break;
+            }
+
+            boolean found = false;
+            for (Word word : words) {
+                if (word.getWordTarget().equalsIgnoreCase(line)) {
+                    System.out.println("Word: '" + word.getWordTarget() + "' deleted!");
+                    words.remove(word);
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found) {
+                System.out.println("Word not found!");
+            }
+        }
+        dictionary.setWords(words);
+    }
+
+    public static void dictionarySearcher(Dictionary dictionary) {
+        ArrayList<Word> words = dictionary.getWords();
+        Scanner sc = new Scanner(System.in);
+
+        while (true) {
+            System.out.print("Search for words start with (Enter '0' to exit): ");
+            String line = sc.nextLine().trim();
+
+            if (line.equals("0")) {
+                System.out.println("Exiting...");
+                break;
+            }
+
+            boolean found = false;
+            boolean first = true;
+            for (Word word : words) {
+                if (word.getWordTarget().toLowerCase().startsWith(line.toLowerCase())) {
+                    if(first) {
+                        System.out.print(word.getWordTarget());
+                        first = false;
+                        found = true;
+                    } else {
+                        System.out.print(", " + word.getWordTarget());
+                        found = true;
+                    }
+                }
+            }
+            System.out.println("");
+            if (!found) {
+                System.out.println("No word found!");
+            }
+        }
+    }
 }
