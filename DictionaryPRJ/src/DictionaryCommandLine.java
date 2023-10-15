@@ -12,4 +12,9 @@ public class DictionaryCommandLine {
             System.out.printf("%-4d| %-8s| %s%n", (i + 1), word.getWordTarget(), word.getWordExplain());
         }
     }
+
+    public static void dictionaryBasic(Dictionary dictionary) {
+        DictionaryManagement.insertFromCommandLine(dictionary);
+        showAllWords(dictionary);
+    }
 }
