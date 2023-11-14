@@ -1,0 +1,4 @@
+cat	meo
+House	Nhà
+Hello	Xin chào
+Love	Yêu thương

@@ -1,8 +1,6 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 
 public class DictionaryManagement {
     public static void insertFromCommandLine(Dictionary dictionary) {
@@ -22,7 +20,7 @@ public class DictionaryManagement {
     public static void insertFromFile(Dictionary dictionary) {
         BufferedReader reader;
         try {
-            reader = new BufferedReader(new FileReader("C:\\Users\\ADMIN\\Documents\\GitHub\\DictionaryPRJ\\DictionaryPRJ\\documents\\dictionaries.txt"));
+            reader = new BufferedReader(new FileReader("DictionaryPRJ/documents/dictionaries.txt"));
             String line = reader.readLine();
 
             while (line != null) {
@@ -37,7 +35,7 @@ public class DictionaryManagement {
 
             reader.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("An error occurred: " + e.getMessage());
         }
     }
 
@@ -163,6 +161,24 @@ public class DictionaryManagement {
             if (!found) {
                 System.out.println("No word found!");
             }
+        }
+    }
+
+    public static void dictionaryExportToFile(Dictionary dictionary) {
+        try {
+            FileWriter writer = new FileWriter("DictionaryPRJ/documents/exportedDictionaries.txt");
+            BufferedWriter line = new BufferedWriter(writer);
+
+            ArrayList<Word> words = dictionary.getWords();
+            for (Word word : words) {
+                line.write(word.getWordTarget() + "\t" + word.getWordExplain());
+                line.newLine();
+            }
+
+            line.close();
+            writer.close();
+        } catch (IOException e) {
+            System.err.println("An error occurred: " + e.getMessage());
         }
     }
 }
