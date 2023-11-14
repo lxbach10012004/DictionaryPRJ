@@ -9,7 +9,7 @@ public class Dictionary {
     }
 
     public ArrayList<Word> getWords() {
-        return words;
+        return new ArrayList<>(words);
     }
 
     public void setWords(ArrayList<Word> words) {
