@@ -31,7 +31,7 @@ public class Game {
                 if (ans.equalsIgnoreCase(elements[5])) {
                     System.out.println("Correct!");
                 } else {
-                    System.out.println("Incorrect!");
+                    System.out.println("Incorrect! The correct answer was " + elements[5]);
                 }
                 System.out.println("Play again? (Y/N)");
                 if (sc.nextLine().equalsIgnoreCase("N")) {
