@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Scanner;
@@ -41,7 +42,8 @@ public class DictionaryCommandLine {
                             "[6] Search\n" +
                             "[7] Game\n" +
                             "[8] Import from file\n" +
-                            "[9] Export to file\n");
+                            "[9] Export to file\n" +
+                            "[10] Google Translate API\n");
             System.out.print("Your action: ");
             Scanner sc = new Scanner(System.in);
             int operation = sc.nextInt();
@@ -78,6 +80,13 @@ public class DictionaryCommandLine {
                 case 9:
                     DictionaryManagement.dictionaryExportToFile(dictionary);
                     System.out.println("Exported to file!");
+                    break;
+                case 10:
+                    try {
+                        GoogleTranslateAPI.translate();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                     break;
                 default:
                     System.out.println("Action not supported");
