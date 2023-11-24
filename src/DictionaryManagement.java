@@ -56,7 +56,6 @@ public class DictionaryManagement {
             String line = sc.nextLine().trim();
 
             if (line.equals("0")) {
-                System.out.println("Exiting...");
                 break;
             }
 
@@ -66,6 +65,14 @@ public class DictionaryManagement {
                     System.out.println("Word: " + word.getWordTarget());
                     System.out.println("Explanation: " + word.getWordExplain());
                     found = true;
+
+                    System.out.println("1. Speak\n2. Continue");
+                    String loop = sc.nextLine();
+                    while (loop.equals("1")) {
+                        GoogleTranslateAPI.textToSpeech(word.getWordTarget());
+                        loop = sc.nextLine();
+                    }
+
                     break;
                 }
             }
@@ -88,7 +95,6 @@ public class DictionaryManagement {
             String line = sc.nextLine().trim();
 
             if (line.equals("0")) {
-                System.out.println("Exiting...");
                 break;
             }
 
@@ -118,7 +124,6 @@ public class DictionaryManagement {
             String line = sc.nextLine().trim();
 
             if (line.equals("0")) {
-                System.out.println("Exiting...");
                 break;
             }
 
@@ -148,7 +153,6 @@ public class DictionaryManagement {
             String line = sc.nextLine().trim();
 
             if (line.equals("0")) {
-                System.out.println("Exiting...");
                 break;
             }
 

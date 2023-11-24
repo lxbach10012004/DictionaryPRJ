@@ -4,6 +4,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
+import com.sun.speech.freetts.Voice;
+import com.sun.speech.freetts.VoiceManager;
 
 public class GoogleTranslateAPI {
 
@@ -45,15 +47,36 @@ public class GoogleTranslateAPI {
         reader.close();
 
         String jsonString = response.toString();
-        // Find the index of the first double quote
         int firstQuoteIndex = jsonString.indexOf('"');
-
-        // Find the index of the second double quote
         int secondQuoteIndex = jsonString.indexOf('"', firstQuoteIndex + 1);
 
-        // Extract the substring between the first and second double quotes
         String extractedWord = jsonString.substring(firstQuoteIndex + 1, secondQuoteIndex);
 
         System.out.println("Translation: " + extractedWord);
+        System.out.println("1. Speak\n2. New translation\n3. Exit");
+        String loop = sc.nextLine();
+        while (loop.equals("1")) {
+            if (choice.equals("1")){
+                textToSpeech(text);
+            } else {
+                textToSpeech(extractedWord);
+            }
+
+            loop = sc.nextLine();
+            if (loop.equals("2")) {
+                translate();;
+            }
+        }
     }
+
+
+    public static void textToSpeech(String text) {
+        System.setProperty("freetts.voices", "com.sun.speech.freetts.en.us.cmu_us_kal.KevinVoiceDirectory");
+        VoiceManager voiceManager = VoiceManager.getInstance();
+        Voice voice = voiceManager.getVoice("kevin16");
+        voice.allocate();
+        voice.speak(text);
+        voice.deallocate();
+    }
+
 }
