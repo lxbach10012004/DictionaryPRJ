@@ -93,10 +93,13 @@ public class DictionaryCommandLine {
                     break;
 
             }
-            System.out.print("New command?(Y/N): ");
-            String cmd = sc.next();
-            if (cmd.equalsIgnoreCase("N")) {
-                running = false;
+
+            if (running){
+                System.out.print("New command?(Y/N): ");
+                String cmd = sc.next();
+                if (cmd.equalsIgnoreCase("N")) {
+                    running = false;
+                }
             }
         }
     }
